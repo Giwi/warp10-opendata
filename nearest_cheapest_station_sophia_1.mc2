@@ -34,7 +34,16 @@ NONEMPTY
   0                  // pre
   0                  // post
   0                  // occurences
-] MAP NONEMPTY 
+] MAP NONEMPTY
 
-// There can only be one
-VALUESORT 0 GET
+[ SWAP 
+  bucketizer.min
+  NOW
+  0 // 31536000000000
+  1
+] BUCKETIZE
+
+[ SWAP
+  []
+  reducer.min
+] REDUCE

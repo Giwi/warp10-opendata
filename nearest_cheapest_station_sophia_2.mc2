@@ -22,19 +22,18 @@ GEO.REGEXP '~(' SWAP + ')' +
 $data
 
 NOW ISO8601
-'2017-09-01T00:00:00.000000Z'
+'2017-11-01T00:00:00.000000Z'
 TIMECLIP
 NONEMPTY
 
 [ SWAP 
   bucketizer.min
-  0
-  31536000000000
-  0
+  NOW
+  0 // 31536000000000
+  1
 ] BUCKETIZE
 
 [ SWAP
   []
   reducer.min
 ] REDUCE
-[ SWAP mapper.tostring 0 0 0 ] MAP
