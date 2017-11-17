@@ -1,0 +1,40 @@
+//
+// Cheapest fuel station near here with hhcode
+//
+
+// Le Val Martin
+//43.6214252,7.022854
+// Les Cabots
+//43.6260146,7.1063278
+// Le Fournel
+//43.5749417,7.1028818
+// Le Cannet
+//43.5745511,6.983477
+
+// Sophia-Antipolis - Hôtel Ibis
+//43.620, 7.057
+
+'POLYGON ((7.023 43.621, 7.106 43.626, 7.103 43.575, 6.983 43.574, 7.023 43.621))' 0.01 false GEO.WKT
+GEO.REGEXP '~(' SWAP + ')' +
+'regexp' STORE
+
+[ 'READ' 'data.fuel' { 'type' 'gazole' 'loc' $regexp } NOW -1 ] FETCH 'data' STORE
+$data
+
+NOW ISO8601
+'2017-09-01T00:00:00.000000Z'
+TIMECLIP
+NONEMPTY
+
+[ SWAP 
+  bucketizer.min
+  0
+  31536000000000
+  0
+] BUCKETIZE
+
+[ SWAP
+  []
+  reducer.min
+] REDUCE
+[ SWAP mapper.tostring 0 0 0 ] MAP
