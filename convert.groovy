@@ -90,7 +90,7 @@ xml.pdv.each { pdv ->
      return
     }
 
-    def date = sdf.parse(prix.@maj.text())   
+    def date = sdf.parse(prix.@maj.text().split(" ")[0] + "T12:00:00")   
     def fuelValue =  Double.parseDouble(prix.@valeur.text()) / 1000
     def  fuelType = prix.@nom.text().trim().toLowerCase()
     
